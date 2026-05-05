@@ -1,6 +1,6 @@
 from fastmcp import FastMCP
 import os
-import aiosqlite  # Changed: sqlite3 → aiosqlite
+import aiosqlite, sqlite3  # Changed: sqlite3 → aiosqlite
 import tempfile
 # Use temporary directory which should be writable
 TEMP_DIR = tempfile.gettempdir()
@@ -14,7 +14,6 @@ mcp = FastMCP("ExpenseTracker")
 def init_db():  # Keep as sync for initialization
     try:
         # Use synchronous sqlite3 just for initialization
-        import sqlite3
         with sqlite3.connect(DB_PATH) as c:
             c.execute("PRAGMA journal_mode=WAL")
             c.execute("""
